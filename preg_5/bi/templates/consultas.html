@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consultas</title>
+</head>
+<body>
+    <h1>Consultas a la Base de Datos</h1>
+
+    <h2>Pedidos de Juan Perez en Mayo 2024</h2>
+    <ul>
+        {% for pedido in pedidos_cliente %}
+            <li>{{ pedido.fecha_pedido }}: ${{ pedido.monto }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Clientes sin pedidos</h2>
+    <ul>
+        {% for cliente in clientes_sin_pedidos %}
+            <li>{{ cliente.nombre }}</li>
+        {% empty %}
+            <li>No hay clientes sin pedidos.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Cliente único (ID=1)</h2>
+    <p>{{ cliente_unico.nombre }}</p>
+
+    <h2>Clientes con totales de pedidos</h2>
+    <table border="1">
+        <tr>
+            <th>Cliente</th>
+            <th>Total Pedidos</th>
+            <th>Monto Total</th>
+        </tr>
+        {% for cliente in clientes_con_totales %}
+            <tr>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.total_pedidos }}</td>
+                <td>${{ cliente.monto_total }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
